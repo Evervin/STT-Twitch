@@ -52,7 +52,7 @@ If you skip this, only the **CPU Model** will work.
      - `chat:read`
      - `chat:edit`
    - These permissions are required for the bot to read and post in your chat.
-4. Paste the generated Access Token (starting with `oauth:`) into the configuration window.
+4. Paste the generated Access Token into the configuration window.
 5. Click **Save & Close**.
 6. Toggle **Twitch: ON** and click **START STT**.
 

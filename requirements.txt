@@ -26,10 +26,8 @@ packaging==26.0
 pefile==2024.8.26
 protobuf==6.33.4
 pycparser==3.0
-pyinstaller==6.18.0
-pyinstaller-hooks-contrib==2026.0
 pyreadline3==3.5.4
-pywin32-ctypes==0.2.3
+
 pyyaml==6.0.3
 requests==2.32.5
 setuptools==80.10.2

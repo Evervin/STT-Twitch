@@ -8,6 +8,12 @@ trans_thread = None
 outputTXT = ""
 twitch_thread = None
 runTwitchMsg = False
+import os
+
+def get_path(filename):
+    return os.path.join(os.path.dirname(__file__), filename)
+
+
 
 def toggle_twitch():
     global runTwitchMsg
@@ -92,6 +98,8 @@ if __name__ == "__main__":
 # model select window
     launcher = tk.Tk()
     launcher.title("Select Model")
+    if os.path.exists(get_path("icon.ico")):
+        launcher.iconbitmap(get_path("icon.ico"))
     center_window(launcher, 300, 150)
 
     lbl = tk.Label(launcher, text="Select STT Model", font=("Arial Bold", 14)).pack(pady=10)
@@ -103,6 +111,8 @@ if __name__ == "__main__":
 # Main application window
     master = tk.Tk()
     master.title("STT Twitch Chat integration")
+    if os.path.exists(get_path("icon.ico")):
+        master.iconbitmap(get_path("icon.ico"))
     center_window(master, 400, 250)
     
     lbl = tk.Label(master, text="STT V.0.1", font=("Arial Bold", 14))
@@ -126,5 +136,14 @@ if __name__ == "__main__":
     output_lbl = tk.Label(master, text="", wraplength=380, height=5, justify="left")
     output_lbl.place(x=10, y=120)
 
-    update_labels()
+    master.after(100, update_labels)  # Schedule the function to run again after 1 second
+
+    def on_closing():
+        """ Handles cleaning up threads and resources before exiting """
+        STT.is_running = False
+        master.destroy()
+        sys.exit(0)
+
+    master.protocol("WM_DELETE_WINDOW", on_closing)
     master.mainloop()
+
