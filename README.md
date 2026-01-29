@@ -40,7 +40,7 @@ A powerful Speech-to-Text (STT) application that integrates directly with Twitch
 
 1.  Launch the application.
 2.  Click the **Config Token** button.
-3.  Paste your Twitch Access Token (start with `oauth:`). You can obtain one from [TwitchTokenGenerator](https://twitchtokengenerator.com/).
+3.  Paste your Twitch Access Token (start with `oauth:`). You can obtain one from [TwitchTokenGenerator](https://twitchtokengenerator.com/). (ensure that chat:read and chat:edit are on when grabbing code)
 4.  Click **Save & Close**.
 
 ## 🎮 Usage
