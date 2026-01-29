@@ -20,7 +20,7 @@ A powerful Speech-to-Text (STT) application that integrates directly with Twitch
 
 1.  **Clone the repository**:
     ```bash
-    git clone [<repository-url>](https://github.com/Evervin/STT-Twitch)
+    git clone https://github.com/Evervin/STT-Twitch
     cd STT-Twitch-App
     ```
 
