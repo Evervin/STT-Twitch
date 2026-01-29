@@ -1,62 +1,73 @@
 # STT Twitch Chat Integration
 
-A powerful Speech-to-Text (STT) application that integrates directly with Twitch chat, allowing streamers to dictate messages in real-time. Built using `faster-whisper` for high-performance transcription and `tkinter` for a simple, user-friendly interface.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 
-## 🚀 Features
+A high-performance **Speech-to-Text (STT)** application that integrates directly with Twitch chat. Dictate your messages in real-time and have them sent to your stream chat instantly using AI-powered transcription.
 
-- **Real-time Transcription**: Converts speech to text with low latency using Whisper models.
-- **Twitch Integration**: Automatically sends transcribed text to your Twitch chat as a message.
-- **Model Flexibility**: Choose between CPU (universal) and GPU (NVIDIA only) models for optimal performance.
-- **Stealth IRC Connection**: Secure and efficient connection to Twitch servers.
-- **Easy Configuration**: Simple UI for managing your Twitch Access Token.
+![STT Preview](icon.ico)
 
-## 📋 Prerequisites
+## Features
 
-- **Python**: 3.13 or higher recommended.
-- **FFmpeg**: Required for audio processing (ensure it's in your system PATH).
-- **GPU Usage**: Requires an NVIDIA GPU with CUDA support for the GPU model.
+- **Real-time Transcription**: Powered by `faster-whisper` for near-instant speech processing.
+- **Twitch Integration**: Connects via SSL to your Twitch IRC for secure messaging.
+- **Hybrid AI Models**: Choose between **CPU** (Low resource) and **GPU** (NVIDIA/CUDA) models.
+- **Configurable**: Built-in UI to manage your Twitch tokens safely.
+- **Secure**: Uses OAuth2 tokens and SSL-encrypted IRC connections.
 
-## 🛠️ Installation
+## Getting Started
 
-1.  **Clone the repository**:
-    ```bash
-    git clone <repository-url>
-    cd STT-Twitch-App
-    ```
+### 1. Prerequisites
+- **Python**: 3.13 or higher.
+- **FFmpeg**: Essential for audio handling. [Download here](https://ffmpeg.org/download.html).
 
-2.  **Install dependencies**:
-    It is recommended to use a virtual environment.
-    ```bash
-    uv pip install .
-    ```
-    *Note: If you are not using `uv`, you can use `pip install -r requirements.txt`.*
+### 2. Installation
+Clone the repository:
+```bash
+git clone https://github.com/Evervin/STT-Twitch.git
+cd STT-Twitch
+```
 
-3.  **External Libraries (CUDA support)**:
-    Due to file size limits, some CUDA DLLs (like `cublasLt64_12.dll`) and Whisper models are excluded from this repository.
-    -   **CUDA DLLs**: If you have an NVIDIA GPU, download the **win V2 installation** from the [whisper-standalone-win releases](https://github.com/Purfview/whisper-standalone-win/releases/tag/libs). Extract the contents and place the DLLs in the `libs/` directory.
-    -   **Whisper Models**: The application will attempt to download models automatically, or you can manually place them in `src/models/`.
+Install dependencies (we recommend `uv` but `pip` works too):
+```bash
+# Option A: Using uv (Recommended)
+uv pip install .
 
-## ⚙️ Configuration
+# Option B: Standard pip
+pip install -r requirements.txt
+```
 
-1.  Launch the application.
-2.  Click the **Config Token** button.
-3.  Paste your Twitch Access Token (start with `oauth:`). You can obtain one from [TwitchTokenGenerator](https://twitchtokengenerator.com/).
-4.  Click **Save & Close**.
+### 3. GPU Acceleration (Optional)
+This project requires large external DLLs for NVIDIA GPU acceleration which are **not included** in this repo.
+**[Read the libs/README.md](libs/README.md) for download instructions.**
 
-## 🎮 Usage
+If you skip this, only the **CPU Model** will work.
 
-1.  **Select Model**: When prompted, choose either **CPU** or **GPU** model based on your hardware.
-2.  **Enable Twitch**: Click the **Twitch: OFF** button to toggle it to **Twitch: ON** if you want messages sent to chat.
-3.  **Start STT**: Click **START STT** to begin recording and transcribing.
-4.  **Stop**: Click **Stop All** to end the session.
+## Configuration
 
-## 📂 Project Structure
+1. Launch the app: `python main.py`
+2. Click **Config Token**.
+3. Generate your token at [TwitchTokenGenerator](https://twitchtokengenerator.com/).
+   - **Important**: When generating the token, ensure you select the following scopes:
+     - `chat:read`
+     - `chat:edit`
+   - These permissions are required for the bot to read and post in your chat.
+4. Paste the generated Access Token (starting with `oauth:`) into the configuration window.
+5. Click **Save & Close**.
+6. Toggle **Twitch: ON** and click **START STT**.
 
-- `main.py`: Entry point for the GUI application.
-- `src/STT.py`: Logic for audio recording and Whisper transcription.
-- `src/twitch.py`: Logic for Twitch IRC connection and message sending.
-- `libs/`: Directory for external DLL dependencies.
+## Project Structure
 
-## 📝 License
+```text
+├── main.py            # GUI Entry Point
+├── src/
+│   ├── STT.py         # Whisper Audio Logic
+│   └── twitch.py      # Twitch IRC Logic
+├── libs/              # PLACE DLLs HERE (See separate README)
+├── config.json        # Your local settings (Ignored by Git)
+└── requirements.txt   # Python Dependencies
+```
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## License
+
+Distributed under the MIT License. See `LICENSE` for details.
