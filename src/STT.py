@@ -32,11 +32,21 @@ audio_queue = queue.Queue()
 audio_buffer = []
 def LoadModel():
     global model
-    local_model_path = os.path.join(os.path.dirname(__file__), "models", "small.en")
-    if model_choice == "CPU":
-        model =  WhisperModel(local_model_path, device="cpu", compute_type="int8")
-    elif model_choice == "GPU":
-        model =  WhisperModel(local_model_path, device="cuda", compute_type="int8_float16")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    local_model_path = os.path.join(base_dir, "models", "small.en")
+    
+    if not os.path.exists(local_model_path):
+        raise FileNotFoundError(f"Model not found at {local_model_path}")
+
+    try:
+        if model_choice == "CPU":
+            model = WhisperModel(local_model_path, device="cpu", compute_type="int8")
+        elif model_choice == "GPU":
+            model = WhisperModel(local_model_path, device="cuda", compute_type="int8_float16")
+    except Exception as e:
+        raise e
+
+
 def audio_callback(indata, frames, time, status):  
     if status:
         print(status)
