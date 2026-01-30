@@ -36,7 +36,8 @@ def LoadModel():
     local_model_path = os.path.join(base_dir, "models", "small.en")
     
     # Required files for faster-whisper
-    required_files = ["model.bin", "config.json", "vocabulary.txt", "tokenizer.json", "preprocessor_config.json"]
+    required_files = ["model.bin", "config.json", "vocabulary.txt", "tokenizer.json"]
+
     missing = [f for f in required_files if not os.path.exists(os.path.join(local_model_path, f))]
     
     if missing:
