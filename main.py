@@ -73,11 +73,19 @@ def update_labels():
     master.after(100, update_labels)  # Schedule the function to run again after 1 second
 
 def set_model(choice):
+    # Disable buttons to prevent double-clicks and show loading state
+    for child in launcher.winfo_children():
+        if isinstance(child, tk.Button):
+            child.config(state="disabled")
+    launcher.title(f"Loading {choice} Model...")
+    launcher.update() # Force UI refresh
+    
     try:
         STT.model_choice = choice
         STT.LoadModel()
         launcher.destroy()
     except Exception as e:
+
         import traceback
         error_details = traceback.format_exc()
         from tkinter import messagebox
