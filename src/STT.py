@@ -35,8 +35,14 @@ def LoadModel():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     local_model_path = os.path.join(base_dir, "models", "small.en")
     
-    if not os.path.exists(local_model_path):
-        raise FileNotFoundError(f"Model not found at {local_model_path}")
+    # Required files for faster-whisper
+    required_files = ["model.bin", "config.json", "vocabulary.txt", "tokenizer.json", "preprocessor_config.json"]
+    missing = [f for f in required_files if not os.path.exists(os.path.join(local_model_path, f))]
+    
+    if missing:
+        raise FileNotFoundError(f"Model corrupted! Missing files: {', '.join(missing)}\n"
+                                "Please run the Installer/Launcher again to repair.")
+
 
     try:
         if model_choice == "CPU":
